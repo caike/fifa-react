@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+
+const URL = "https://frozen-peak-68797.herokuapp.com/winners"; // "http://localhost:8080/winners"
 
 function App() {
+  const [winners, setWinners] = useState([]);
+
+  useEffect(() => {
+    fetch(URL)
+      .then(data => data.json())
+      .then(data => setWinners(data.winners));
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <p>FIFA Winners</p>
+      <WinnerList winners={winners}></WinnerList>
+    </div>
+  );
+}
+
+function WinnerList({ winners }) {
+  const list = winners.map((w, i) => <li key={i}>{w.country}</li>);
+  return (
+    <div className="winner-list">
+      <ul>{list}</ul>
     </div>
   );
 }
