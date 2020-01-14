@@ -7,10 +7,11 @@ function App() {
   const [winners, setWinners] = useState([]);
 
   useEffect(() => {
+    console.log("fetching");
     fetch(URL)
       .then(data => data.json())
       .then(data => setWinners(data.winners));
-  });
+  }, []);
 
   return (
     <div className="container">
@@ -24,15 +25,19 @@ function App() {
           </div>
         </div>
       </div>
-      <WinnerList winners={winners}></WinnerList>
+      <WinnerList winners={winners} sortByYear={sortByYear}></WinnerList>
     </div>
   );
+
+  function sortByYear() {
+    setWinners(winners.slice(0).reverse());
+  }
 }
 
-function WinnerList({ winners }) {
+function WinnerList({ winners, sortByYear }) {
   const list = winners.map((w, i) => {
     return (
-      <tr>
+      <tr key={i}>
         <td>{w.country}</td>
         <td>{w.year}</td>
       </tr>
@@ -43,7 +48,11 @@ function WinnerList({ winners }) {
       <thead>
         <tr>
           <th>Team</th>
-          <th>Year</th>
+          <th>
+            <a href="#" onClick={sortByYear}>
+              Year
+            </a>
+          </th>
         </tr>
       </thead>
       <tbody>{list}</tbody>
