@@ -1,7 +1,7 @@
 {
   "build": {
     "env": {
-      "REACT_APP_API_URL": "@REACT_APP_API_URL"
+      "REACT_APP_API_URL": "https://frozen-peak-68797.herokuapp.com"
     }
   }
 }
