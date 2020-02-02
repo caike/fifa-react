@@ -23,7 +23,10 @@ function App() {
   }
 
   function handleLogout() {
-    logout().then(setUser(false));
+    logout().then(() => {
+      setLoginError(null);
+      setUser(false);
+    });
   }
 
   return user ? (
