@@ -1,13 +1,10 @@
 const localStorageKey = "fifa-api-user";
 
-function login(event) {
-  event.preventDefault();
-  const { email, password } = event.target.elements;
-
+function login(email, password) {
   const config = {
     method: "POST",
     headers: { "content-type": "application/json" },
-    body: JSON.stringify({ email: email.value, password: password.value })
+    body: JSON.stringify({ email, password })
   };
 
   return new Promise((resolve, reject) => {
