@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { fetchList } from "./utils";
 import "./App.sass";
-
-const LIST_URL = `${process.env.REACT_APP_API_URL}/winners`;
 
 function AuthenticatedApp({ handleLogout }) {
   const [winners, setWinners] = useState([]);
 
   useEffect(() => {
     console.log("fetching");
-    fetch(LIST_URL)
+    fetchList()
       .then(data => data.json())
       .then(data => setWinners(data.winners));
   }, []);

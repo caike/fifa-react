@@ -43,4 +43,10 @@ function logout() {
   });
 }
 
-export { login, logout, loadUser };
+const LIST_URL = `${process.env.REACT_APP_API_URL}/winners`;
+
+function fetchList() {
+  return fetch(LIST_URL);
+}
+
+export { login, logout, loadUser, fetchList };
